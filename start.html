@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2216%22> 🏠 </text></svg>">
+<title>Home</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+</head>
+<body>
+
+<div class="dashboard">
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>💰PocketTrack</h2>
+
+<ul>
+
+<li class="active">
+    <a href="start.html">
+<span>🏠</span> Home</a>
+</li>
+
+<li><a href="expenses.html">
+<span>💳</span> Expenses</a>
+</li>
+
+<li><a href="analytics.html">
+<span>📊</span> Analytics</a>
+</li>
+
+<li><a href="settings.html">
+<span>⚙️</span> Settings</a>
+</li>
+
+</ul>
+
+</div>
+
+
+<!-- MAIN -->
+
+<div class="main">
+
+<div class="top-bar">
+
+<h1>Expense Dashboard</h1>
+
+
+</div>
+
+
+<!-- SUMMARY CARDS -->
+
+<div class="cards">
+
+<div class="card">
+<h3>Income</h3>
+<p><span id="income">0</span></p>
+</div>
+
+<div class="card">
+<h3>Expense</h3>
+<p><span id="expense">0</span></p>
+</div>
+
+<div class="card">
+<h3>Savings</h3>
+<p><span id="savings">0</span></p>
+</div>
+
+</div>
+
+
+<!-- ADD + BUDGET + FILTER -->
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Add Transaction</h3>
+
+<input id="desc" placeholder="Description">
+
+<input id="amount" type="number" placeholder="Amount">
+
+<select id="category">
+<option value="" disabled selected>Choose Category</option>
+<option value="Food">🍔 Food</option>
+<option value="Shopping">🛍 Shopping</option>
+<option value="Transport">🚗 Transport</option>
+<option value="Bills">💡 Bills</option>
+<option value="Entertainment">🎬 Entertainment</option>
+<option value="Health">🏥 Health</option>
+<option value="Other">📦 Other</option>
+</select>
+
+<input id="date" type="date">
+
+<select id="type">
+<option value="income">Income</option>
+<option value="expense">Expense</option>
+</select>
+
+<button onclick="addTransaction()">Add</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Monthly Budget</h3>
+
+<input type="month" id="budgetMonth" onchange="loadBudget()">
+
+<input id="budgetInput" type="number" placeholder="Set Budget">
+
+<button onclick="setBudget()">Save</button>
+
+<p id="budgetWarning"></p>
+
+</div>
+
+
+<div class="card">
+
+<h3>Filter by Date</h3>
+
+<div class="filter-date">
+
+<div class="calendar">
+
+<div class="calendar-header">
+<button id="prevMonth">◀</button>
+<h4 id="monthYear"></h4>
+<button id="nextMonth">▶</button>
+</div>
+
+<div class="days">
+<div>Sun</div>
+<div>Mon</div>
+<div>Tue</div>
+<div>Wed</div>
+<div>Thu</div>
+<div>Fri</div>
+<div>Sat</div>
+</div>
+
+<div id="calendarDates" class="dates"></div>
+
+</div>
+
+<button onclick="resetFilter()">Reset</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CHART -->
+
+<div class="chart-box">
+
+<h3>Expense Trend</h3>
+
+<input type="month" id="chartMonth" onchange="updateChart()">
+
+<div class="chart-container">
+<canvas id="expenseChart"></canvas>
+</div>
+
+</div>
+
+
+<!-- UPCOMING PAYMENTS -->
+
+<div class="payments-box">
+
+<h3>Upcoming Payments</h3>
+
+<div id="paymentsList" class="payments-list">
+</div>
+
+</div>
+
+
+<!-- TRANSACTIONS -->
+
+<div class="transactions">
+
+<h3>Transactions</h3>
+
+<ul id="list"></ul>
+
+</div>
+
+
+<!-- INSIGHTS -->
+
+<div class="insights">
+
+<h3>Insights</h3>
+
+<div class="insight-cards">
+
+<div class="insight-card">
+<span class="insight-title">📅 Highest Spending Day</span>
+<span id="maxDay">-</span>
+</div>
+
+<div class="insight-card">
+<span class="insight-title">💸 Amount Spent</span>
+<span id="maxAmount"></span>
+</div>
+
+<div class="insight-card">
+<span class="insight-title">🛍 Reason</span>
+<span id="maxReason">-</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
